@@ -7,6 +7,20 @@ using Flux: onehotbatch, onecold, crossentropy
 using BSON: @save
 using Random, StatsBase
 
+function ensure_dataset_structure()
+    base_path = "images/train"
+    
+    # Create base train folder if not exists
+    if !isdir(base_path)
+        println("📂 Creating base path: $base_path")
+        mkpath(base_path)
+    end
+
+end
+
+# Call before loading images
+ensure_dataset_structure()
+
 # 1. Load & Preprocess Images
 function load_images(path::String)
     classes = ["Type_1", "Type_2", "Type_3"]
